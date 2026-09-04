@@ -1,0 +1,9 @@
+Déposez ici les 4 vidéos du site, avec exactement ces noms :
+
+landing.mp4      → fond de la page d'accueil (optionnel)
+conception.mp4   → section "La Conception" (vidéo compacte)
+process.mp4      → section "Processus" (fond discret)
+why-bkh.mp4       → section "Pourquoi BKH" (fond plein écran)
+
+Toutes les vidéos sont lues en boucle automatiquement (autoplay, muted, loop).
+Préférez des vidéos courtes (10 à 20 secondes) et bien compressées.

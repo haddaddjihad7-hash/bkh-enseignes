@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis gère le smooth scroll */
+}
+
+body {
+  background: #050506;
+  color: #fafafa;
+  font-family: 'Manrope', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #3b82f6;
+  color: #fafafa;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Grain très léger, appliqué en overlay fixe sur tout le site */
+.bkh-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Placeholder gris/argent pour tous les médias non encore fournis */
+.media-placeholder {
+  position: relative;
+  background: linear-gradient(135deg, #212327 0%, #17181b 50%, #2a2c30 100%);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.media-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.06) 40%,
+    rgba(255, 255, 255, 0.13) 50%,
+    rgba(255, 255, 255, 0.06) 60%,
+    transparent 80%
+  );
+  transform: translateX(-100%);
+  animation: sheen 6s ease-in-out infinite;
+}
+
+.media-placeholder::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  z-index: 2;
+}
+
+@keyframes sheen {
+  0% {
+    transform: translateX(-100%);
+  }
+  45%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+/* Animations de défilement automatique gauche -> droite (LTR) */
+@keyframes marquee-ltr {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  animation: marquee-ltr 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-ltr-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee-ltr 60s linear infinite;
+  will-change: transform;
+}
+
+.pause-on-hover:hover .animate-marquee-ltr,
+.pause-on-hover:hover .animate-marquee-ltr-slow {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media-placeholder::before {
+    animation: none;
+  }
+  .animate-marquee-ltr,
+  .animate-marquee-ltr-slow {
+    animation: none;
+  }
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scrollbar discrète */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #050506;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2c30;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3d42;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

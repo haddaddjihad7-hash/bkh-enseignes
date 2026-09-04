@@ -1,0 +1,7 @@
+Déposez ici les photos AVANT / APRÈS de chaque projet.
+
+Exemple pour le projet 1 :
+project-01-before.jpg
+project-01-after.jpg
+
+Puis ajoutez le projet dans src/data/projects.js (voir le README principal).
