@@ -14,6 +14,8 @@ export default function SmoothScroll({ children }) {
       smoothWheel: true,
     })
 
+    window.__lenis = lenis
+
     let rafId
     const raf = (time) => {
       lenis.raf(time)
@@ -24,6 +26,7 @@ export default function SmoothScroll({ children }) {
     return () => {
       cancelAnimationFrame(rafId)
       lenis.destroy()
+      delete window.__lenis
     }
   }, [])
 

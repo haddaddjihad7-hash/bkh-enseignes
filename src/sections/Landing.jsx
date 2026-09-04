@@ -41,7 +41,15 @@ export default function Landing() {
     return () => ctx.revert()
   }, [])
 
-  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  const scrollTo = (id) => {
+    const el = document.getElementById(id)
+    if (!el) return
+    if (window.__lenis) {
+      window.__lenis.scrollTo(el, { duration: 1.1, offset: -20 })
+    } else {
+      el.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
     <section id="accueil" ref={sectionRef} className="relative flex min-h-screen items-center overflow-hidden bg-noir pt-24">
@@ -63,7 +71,8 @@ export default function Landing() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/12 bg-noir/40 px-3.5 py-1.5 backdrop-blur-md font-mono text-[11px] uppercase tracking-widest2 text-electrique-soft"
+          onClick={() => scrollTo('galerie')}
+          className="hover-target mb-6 inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/12 bg-noir/40 px-3.5 py-1.5 backdrop-blur-md font-mono text-[11px] uppercase tracking-widest2 text-electrique-soft transition-colors hover:border-electrique-soft"
         >
           <Sparkles size={13} className="text-electrique-soft" />
           <span>{t('landing.line1')} · {t('landing.line2')}</span>
@@ -90,33 +99,34 @@ export default function Landing() {
           className="mt-10 flex flex-wrap items-center gap-4"
         >
           <Magnetic strength={0.25}>
+            <button
+              onClick={() => scrollTo('galerie')}
+              className="hover-target flex items-center gap-2 rounded-full bg-electrique px-8 py-4 text-[13.5px] font-semibold text-blanc shadow-glow transition-all hover:bg-blue-600 hover:-translate-y-0.5"
+            >
+              <span>{t('landing.ctaSecondary')}</span>
+              <ArrowDown size={16} />
+            </button>
+          </Magnetic>
+          <Magnetic strength={0.25}>
             <a
               href={tallyLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover-target flex items-center gap-2 rounded-full bg-electrique px-8 py-4 text-[13.5px] font-semibold text-blanc shadow-glow transition-all hover:bg-blue-600 hover:-translate-y-0.5"
+              className="hover-target inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-noir/40 px-7 py-4 text-[13.5px] font-semibold text-blanc backdrop-blur-md transition-all hover:border-electrique-soft hover:bg-white/10"
             >
-              {t('landing.ctaPrimary')}
+              <span>{t('landing.ctaPrimary')}</span>
               <ArrowUpRight size={16} />
             </a>
-          </Magnetic>
-          <Magnetic strength={0.25}>
-            <button
-              onClick={() => scrollTo('galerie')}
-              className="hover-target rounded-full border border-white/20 bg-noir/40 px-7 py-4 text-[13.5px] font-semibold text-blanc backdrop-blur-md transition-all hover:border-electrique-soft hover:bg-white/10"
-            >
-              {t('landing.ctaSecondary')}
-            </button>
           </Magnetic>
         </motion.div>
       </div>
 
       <motion.button
-        onClick={() => scrollTo('processus')}
+        onClick={() => scrollTo('galerie')}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.3, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10.5px] uppercase tracking-widest text-white/60 hover:text-blanc transition-colors"
+        className="hover-target absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10.5px] uppercase tracking-widest text-white/60 hover:text-blanc transition-colors cursor-pointer"
       >
         {t('landing.scroll')}
         <motion.span animate={{ y: [0, 6, 0] }} transition={{ duration: 1.8, repeat: Infinity }}>

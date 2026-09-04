@@ -20,7 +20,13 @@ export default function Navbar() {
 
   const goTo = (id) => {
     setOpen(false)
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    const el = document.getElementById(id)
+    if (!el) return
+    if (window.__lenis) {
+      window.__lenis.scrollTo(el, { duration: 1.1, offset: -20 })
+    } else {
+      el.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   return (
