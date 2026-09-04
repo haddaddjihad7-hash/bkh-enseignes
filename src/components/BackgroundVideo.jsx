@@ -58,7 +58,6 @@ export default function BackgroundVideo({
         <video
           ref={videoRef}
           src={currentVideo}
-          poster={fallbackSrc}
           autoPlay
           muted
           loop

@@ -12,7 +12,6 @@ import { tallyLink } from '../data/siteConfig.js'
 gsap.registerPlugin(ScrollTrigger)
 
 const LANDING_VIDEO = '/videos/landing.mp4'
-const LANDING_BACKGROUND = '/images/landing-background.jpg'
 
 export default function Landing() {
   const { t } = useLanguage()
@@ -53,12 +52,11 @@ export default function Landing() {
 
   return (
     <section id="accueil" ref={sectionRef} className="relative flex min-h-screen items-center overflow-hidden bg-noir pt-24">
-      {/* Fond vidéo / photo avec un voile très léger et élégant pour préserver la clarté et l'éclat des médias */}
+      {/* Fond vidéo avec un voile très léger pour préserver la clarté et l'éclat */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div ref={bgRef} className="absolute inset-0 h-full w-full">
           <BackgroundVideo
             src={LANDING_VIDEO}
-            fallbackSrc={LANDING_BACKGROUND}
             label="Landing background"
             overlayClassName="bg-gradient-to-b from-noir/30 via-noir/15 to-noir/70"
           />

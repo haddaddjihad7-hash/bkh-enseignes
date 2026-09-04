@@ -6,7 +6,7 @@ import Magnetic from '../components/Magnetic.jsx'
 import { useLanguage } from '../context/LanguageContext.jsx'
 import { tallyLink } from '../data/siteConfig.js'
 
-const CONTACT_BG = '/images/landing-background.jpg'
+const CONTACT_BG = '/images/projects/bkh-banner-v1.jpg'
 
 export default function YourProject() {
   const { t } = useLanguage()
